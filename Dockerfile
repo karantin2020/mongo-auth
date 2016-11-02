@@ -11,7 +11,7 @@ ENV MONGO_PACKAGE mongodb-org
 VOLUME /data/db /data/configdb
 
 RUN groupadd -r mongodb && useradd -r -g mongodb mongodb \
-	&& apt-get update && apt-get upgrade \
+	&& apt-get update && apt-get upgrade -y \
 	&& apt-get install -y --no-install-recommends \
 		numactl \
 	&& rm -rf /var/lib/apt/lists/* \
