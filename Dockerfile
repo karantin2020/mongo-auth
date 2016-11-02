@@ -1,4 +1,4 @@
-FROM ubuntu:16.04
+FROM debian:8
 
 ENV GOSU_VERSION 1.7
 ENV GPG_KEYS \
