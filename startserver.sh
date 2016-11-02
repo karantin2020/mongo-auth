@@ -1,18 +1,20 @@
 #!/bin/sh
 
-user=''
-password=''
-database=''
+user=""
+password=""
+database=""
+pathName="server1"
 while [ $# -gt 0 ]
 do
     case "$1" in
       -u)  user="$2"; shift;;
       -p)  password="$2"; shift;;
       -d)  database="$2"; shift;;
+      -n)  pathName="$2"; shift;;
       --) shift; break;;
       -h)
           echo >&2 \
-          "usage: $0 -u username -p password -d database"
+          "usage: $0 -u username -p password -d database -n shortPathName"
           exit 1;;
       *)  break;; # terminate while loop
     esac
@@ -24,8 +26,8 @@ if test -z $user || test -z $password || test -z $database; then
   exit 1
 fi
 
-hostPath="/home/allecs/Workspace/MongoDB/server1"
-imageName="node3030/mongo-3.2"
+hostPath="/home/allecs/Workspace/MongoDB/$pathName"
+imageName="node3030/mongo-auth"
 
 docker run -d -e MONGO_PASSWD=$password --name mongod -d -v $hostPath:/data/db $imageName --storageEngine wiredTiger --auth
 sleep 3s
