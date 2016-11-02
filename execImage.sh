@@ -22,5 +22,6 @@ if test -z $user || test -z $password || test -z $database; then
 fi
 
 imageName="node3030/mongo-auth"
+containerName="mongod"
 
-docker run -it --rm --link mongod:mongo node3030/mongo-3.2 mongo -u $user -p $password --authenticationDatabase $database mongod/admin
+docker run -it --rm --link $containerName:mongo $imageName mongo -u $user -p $password --authenticationDatabase $database $containerName/$database
