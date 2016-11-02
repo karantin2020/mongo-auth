@@ -39,10 +39,10 @@ RUN groupadd -r mongodb && useradd -r -g mongodb mongodb \
 		${MONGO_PACKAGE}-shell=$MONGO_VERSION \
 		${MONGO_PACKAGE}-mongos=$MONGO_VERSION \
 		${MONGO_PACKAGE}-tools=$MONGO_VERSION \
+	&& apt-get autoremove -y && apt-get clean \
 	&& rm -rf /var/lib/apt/lists/* \
 	&& rm -rf /tmp/* /var/tmp/* \
 	&& rm -rf /var/lib/mongodb /var/cache/* \
-	&& apt-get autoremove -y && apt-get clean \
 	&& mv /etc/mongod.conf /etc/mongod.conf.orig \
 	&& mkdir -p /data/db /data/configdb \
 	&& mkdir -p /data/entry \
