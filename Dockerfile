@@ -1,9 +1,7 @@
 FROM debian:8
 
 ENV GOSU_VERSION 1.7
-ENV GPG_KEYS \
-	DFFA3DCF326E302C4787673A01C4E7FAAAB2461C \
-	42F3E95A2C4F08279C4960ADD68FA50FEA312927
+
 ENV MONGO_MAJOR 3.4
 ENV MONGO_VERSION 3.4.0
 ENV MONGO_PACKAGE mongodb-org
@@ -27,9 +25,7 @@ RUN groupadd -r mongodb && useradd -r -g mongodb mongodb \
 	&& gosu nobody true \
 	&& apt-get purge -y --auto-remove wget \
 	&& set -ex \
-	&& for key in $GPG_KEYS; do \
-		apt-key adv --keyserver ha.pool.sks-keyservers.net --recv-keys "$key"; \
-	done \
+	&& apt-key adv --keyserver ha.pool.sks-keyservers.net --recv-keys 0C49F3730359A14518585931BC711F9BA15703C6 \
 	&& echo "deb http://repo.mongodb.org/apt/debian jessie/mongodb-org/$MONGO_MAJOR main" > /etc/apt/sources.list.d/mongodb-org.list \
 	&& set -x \
 	&& apt-get update \
